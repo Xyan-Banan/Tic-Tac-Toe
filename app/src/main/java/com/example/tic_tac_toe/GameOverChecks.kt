@@ -33,7 +33,7 @@ private fun findGameOverRow(buttons: List<ImageButton>): Drawable? {
     return null
 }
 
-private fun isGameOver(buttons: List<ImageButton>, playerDrawable: Drawable, applicationContext: Context): Boolean {
+fun isGameOver(buttons: List<ImageButton>, playerDrawable: Drawable, applicationContext: Context): Boolean {
     val buttonImg = findGameOverRow(buttons)
     if (buttonImg != null) {
         if (buttonImg == playerDrawable) {
