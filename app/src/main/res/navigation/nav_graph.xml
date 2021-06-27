@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation"
+    app:startDestination="@id/startMenuFragment">
+
+    <fragment
+        android:id="@+id/startMenuFragment"
+        android:name="com.example.tic_tac_toe.startmenu.StartMenuFragment"
+        android:label="StartMenuFragment" >
+        <action
+            android:id="@+id/action_startGame"
+            app:destination="@id/gameFieldFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/gameFieldFragment"
+        android:name="com.example.tic_tac_toe.gamefield.GameFieldFragment"
+        android:label="GameFieldFragment" />
+</navigation>

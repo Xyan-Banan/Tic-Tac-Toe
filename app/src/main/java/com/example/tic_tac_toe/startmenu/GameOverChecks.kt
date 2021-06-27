@@ -1,4 +1,4 @@
-package com.example.tic_tac_toe
+package com.example.tic_tac_toe.startmenu
 
 import android.content.Context
 import android.graphics.drawable.Drawable
