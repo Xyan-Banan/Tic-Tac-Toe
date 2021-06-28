@@ -1,6 +1,5 @@
-package com.example.tic_tac_toe.startmenu
+package com.example.tic_tac_toe.startMenu
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 

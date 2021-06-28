@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.tic_tac_toe.startmenu.StartMenuViewModel" />
+            type="com.example.tic_tac_toe.startMenu.StartMenuViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,8 +16,9 @@
         tools:context=".MainActivity">
 
         <RadioGroup
-            android:id="@+id/radioGroup"
+            android:id="@+id/numPlayersRadioGroup"
             android:layout_width="wrap_content"
+            android:background="@drawable/border_rounded_blue"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -37,6 +38,7 @@
                 app:buttonTint="@color/purple_500" />
 
             <RadioGroup
+                android:id="@+id/soloGameTypeRadioGroup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -92,7 +94,7 @@
             android:text="@string/start"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+            app:layout_constraintTop_toBottomOf="@+id/numPlayersRadioGroup" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

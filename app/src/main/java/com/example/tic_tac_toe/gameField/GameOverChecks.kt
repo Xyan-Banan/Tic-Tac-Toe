@@ -1,4 +1,4 @@
-package com.example.tic_tac_toe.startmenu
+package com.example.tic_tac_toe.gameField
 
 import android.content.Context
 import android.graphics.drawable.Drawable
@@ -37,9 +37,9 @@ fun isGameOver(buttons: List<ImageButton>, playerDrawable: Drawable, application
     val buttonImg = findGameOverRow(buttons)
     if (buttonImg != null) {
         if (buttonImg == playerDrawable) {
-            Toast.makeText(applicationContext, "Game over: You win!", Toast.LENGTH_LONG).show()
+            Toast.makeText(applicationContext, "Game over: You win!", Toast.LENGTH_SHORT).show()
         } else {
-            Toast.makeText(applicationContext, "Game over: You lose :(", Toast.LENGTH_LONG)
+            Toast.makeText(applicationContext, "Game over: You lose :(", Toast.LENGTH_SHORT)
                 .show()
         }
         return true

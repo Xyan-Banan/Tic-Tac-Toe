@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/startMenuFragment"
-        android:name="com.example.tic_tac_toe.startmenu.StartMenuFragment"
+        android:name="com.example.tic_tac_toe.startMenu.StartMenuFragment"
         android:label="StartMenuFragment" >
         <action
             android:id="@+id/action_startGame"
@@ -18,6 +18,9 @@
     </fragment>
     <fragment
         android:id="@+id/gameFieldFragment"
-        android:name="com.example.tic_tac_toe.gamefield.GameFieldFragment"
-        android:label="GameFieldFragment" />
+        android:name="com.example.tic_tac_toe.gameField.GameFieldFragment"
+        android:label="GameFieldFragment" >
+        <argument android:name="gameType"
+            app:argType="com.example.tic_tac_toe.startMenu.GameType" />
+    </fragment>
 </navigation>
