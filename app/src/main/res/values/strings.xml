@@ -2,9 +2,7 @@
     <string name="app_name">Tic-Tac-Toe</string>
     <string name="restart">Restart</string>
     <string name="btn_description">game field button</string>
-    <string name="two_players">2 игрока</string>
-    <string name="crosses">Крестики</string>
-    <string name="noughts">Нолики</string>
-    <string name="one_player">1 игрок</string>
-    <string name="start">Погнали!</string>
+    <string name="two_players">2 players</string>
+    <string name="one_player">1 player</string>
+    <string name="start">Let\'s go!</string>
 </resources>

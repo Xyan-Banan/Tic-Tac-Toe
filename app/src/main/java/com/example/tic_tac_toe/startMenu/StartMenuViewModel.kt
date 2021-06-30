@@ -4,5 +4,5 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class StartMenuViewModel: ViewModel() {
-    val soloGameChecked = MutableLiveData<Boolean>()
+    val soloGameChecked = MutableLiveData(false)
 }

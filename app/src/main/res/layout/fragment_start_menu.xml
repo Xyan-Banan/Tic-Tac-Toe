@@ -13,13 +13,16 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/white"
         tools:context=".MainActivity">
 
         <RadioGroup
             android:id="@+id/numPlayersRadioGroup"
-            android:layout_width="wrap_content"
-            android:background="@drawable/border_rounded_blue"
+            android:layout_width="350dp"
             android:layout_height="wrap_content"
+            android:background="@drawable/border_rounded"
+            android:gravity="center"
+            android:padding="30dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -30,8 +33,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingStart="0dp"
-                android:paddingEnd="10dp"
+                android:paddingEnd="40dp"
                 android:text="@string/one_player"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                app:buttonTint="@color/purple_500" />
+
+            <RadioButton
+                android:id="@+id/twoPlayerGameRadioButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:enabled="true"
+                android:paddingStart="0dp"
+                android:paddingEnd="40dp"
+                android:text="@string/two_players"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="20sp"
@@ -45,44 +62,29 @@
 
                 <RadioButton
                     android:id="@+id/crossesRadioButton"
-                    android:layout_width="130dp"
-                    android:layout_height="wrap_content"
-                    android:checked="true"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:background="@drawable/cross_radio_button"
+                    android:button="@null"
+                    android:checked="false"
                     android:enabled="false"
                     android:gravity="center"
-                    android:text="@string/crosses"
-                    android:textColor="@color/black"
-                    android:textSize="20sp"
+                    android:textSize="16sp"
                     app:buttonTint="@color/purple_500" />
 
-                <!--                    android:enabled="@{viewModel.soloGameChecked}"-->
                 <RadioButton
                     android:id="@+id/noughtsRadioButton"
-                    android:layout_width="130dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginStart="30dp"
+                    android:background="@drawable/donut_radio_button"
+                    android:button="@null"
                     android:enabled="false"
                     android:gravity="center"
-                    android:text="@string/noughts"
-                    android:textColor="@color/black"
-                    android:textSize="20sp"
-                    app:buttonTint="@color/purple_500" />
-
+                    android:textSize="16sp"
+                    app:buttonTint="@color/purple_500"
+                    tools:enabled="true" />
             </RadioGroup>
-
-            <RadioButton
-                android:id="@+id/twoPlayerGameRadioButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:enabled="true"
-                android:paddingStart="0dp"
-                android:paddingEnd="10dp"
-                android:text="@string/two_players"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                app:buttonTint="@color/purple_500" />
 
         </RadioGroup>
 
@@ -91,7 +93,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
+            android:background="@drawable/border_rounded"
             android:text="@string/start"
+            android:textColor="@color/black"
+            app:backgroundTint="@null"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/numPlayersRadioGroup" />

@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.drawable.Drawable
 import android.widget.ImageButton
 import android.widget.Toast
+import com.example.tic_tac_toe.startMenu.GameType
 
 private fun findGameOverRow(buttons: List<ImageButton>): Drawable? {
     val images = buttons.map { it.drawable }
@@ -33,15 +34,32 @@ private fun findGameOverRow(buttons: List<ImageButton>): Drawable? {
     return null
 }
 
-fun isGameOver(buttons: List<ImageButton>, playerDrawable: Drawable, applicationContext: Context): Boolean {
-    val buttonImg = findGameOverRow(buttons)
-    if (buttonImg != null) {
-        if (buttonImg == playerDrawable) {
-            Toast.makeText(applicationContext, "Game over: You win!", Toast.LENGTH_SHORT).show()
-        } else {
-            Toast.makeText(applicationContext, "Game over: You lose :(", Toast.LENGTH_SHORT)
-                .show()
+fun isGameOver(
+    buttons: List<ImageButton>,
+    playerDrawable: Drawable,
+    gameType: GameType,
+    buttonsLeft: Int,
+    applicationContext: Context
+): Boolean {
+    findGameOverRow(buttons)?.also { buttonImg ->
+        val msg = when (gameType) {
+            GameType.SOLOCROSS, GameType.SOLONOUGHT -> when (buttonImg) {
+                playerDrawable -> "Game over: You win!"
+                else -> "Game over: You lose :("
+            }
+
+            GameType.TWOPLAYERS -> when (buttonImg) {
+                playerDrawable -> "Game over: Player 1 win!"
+                else -> "Game over: Player 2 win!"
+            }
         }
+
+        Toast.makeText(applicationContext, msg, Toast.LENGTH_SHORT).show()
+
+        return true
+    }
+    if (buttonsLeft == 0) {
+        Toast.makeText(applicationContext, "Game over: Draw!", Toast.LENGTH_SHORT).show()
         return true
     }
     return false
