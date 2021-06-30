@@ -25,12 +25,14 @@ class StartMenuFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         val binding = FragmentStartMenuBinding.inflate(inflater)
-        val viewModel = StartMenuViewModel()
-        binding.viewModel = viewModel
 
         binding.onePlayerGameRadioButton.setOnCheckedChangeListener { buttonView, isChecked ->
             binding.crossesRadioButton.isEnabled = isChecked
             binding.noughtsRadioButton.isEnabled = isChecked
+        }
+
+        binding.numPlayersRadioGroup.setOnCheckedChangeListener { group, checkedId ->
+            binding.startBtn.isEnabled = true
         }
 
         binding.startBtn.setOnClickListener {
@@ -41,7 +43,7 @@ class StartMenuFragment : Fragment() {
                     else -> GameType.SOLOCROSS
                 }
             }
-            this.findNavController().navigate(StartMenuFragmentDirections.actionStartGame(gameType))
+            findNavController().navigate(StartMenuFragmentDirections.actionStartGame(gameType))
         }
 
         return binding.root

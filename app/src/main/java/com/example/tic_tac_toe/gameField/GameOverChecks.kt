@@ -1,9 +1,12 @@
 package com.example.tic_tac_toe.gameField
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.widget.ImageButton
 import android.widget.Toast
+import androidx.core.graphics.drawable.toBitmap
+import com.example.tic_tac_toe.R
 import com.example.tic_tac_toe.startMenu.GameType
 
 private fun findGameOverRow(buttons: List<ImageButton>): Drawable? {
@@ -34,6 +37,7 @@ private fun findGameOverRow(buttons: List<ImageButton>): Drawable? {
     return null
 }
 
+@SuppressLint("UseCompatLoadingForDrawables")
 fun isGameOver(
     buttons: List<ImageButton>,
     playerDrawable: Drawable,
@@ -47,9 +51,9 @@ fun isGameOver(
                 playerDrawable -> "Game over: You win!"
                 else -> "Game over: You lose :("
             }
-
-            GameType.TWOPLAYERS -> when (buttonImg) {
-                playerDrawable -> "Game over: Player 1 win!"
+            GameType.TWOPLAYERS -> when (buttonImg.toBitmap()) {
+                applicationContext.resources.getDrawable(R.drawable.cross)
+                    .toBitmap() -> "Game over: Player 1 win!"
                 else -> "Game over: Player 2 win!"
             }
         }

@@ -1,5 +1,6 @@
 package com.example.tic_tac_toe.gameField
 
+import android.annotation.SuppressLint
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -14,6 +15,8 @@ import kotlin.random.Random
 
 class GameFieldFragment : Fragment() {
 
+    private lateinit var binding: FragmentGameFieldBinding
+
     private lateinit var buttons: List<ImageButton>
     private lateinit var availableButtons: MutableList<ImageButton>
 
@@ -23,12 +26,13 @@ class GameFieldFragment : Fragment() {
     private lateinit var gameType: GameType
     private var isGameOver: Boolean = false
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        val binding = FragmentGameFieldBinding.inflate(inflater)
+        binding = FragmentGameFieldBinding.inflate(inflater)
 
         binding.apply {
             buttons = listOf(
@@ -47,14 +51,24 @@ class GameFieldFragment : Fragment() {
         }
         gameType = GameFieldFragmentArgs.fromBundle(requireArguments()).gameType
 
-        if (gameType == GameType.SOLOCROSS) {
-//        cross = AppCompatResources.getDrawable(applicationContext, R.drawable.cross)?.toBitmap()!!
-            playerDrawable = resources.getDrawable(R.drawable.cross)
-            computerDrawable = resources.getDrawable(R.drawable.donut)
-        } else {
-            playerDrawable = resources.getDrawable(R.drawable.donut)
-            computerDrawable = resources.getDrawable(R.drawable.cross)
-            computerClick()
+        when (gameType) {
+            GameType.SOLOCROSS -> {
+//              cross = AppCompatResources.getDrawable(applicationContext, R.drawable.cross)?.toBitmap()!!
+                playerDrawable = resources.getDrawable(R.drawable.cross)
+                computerDrawable = resources.getDrawable(R.drawable.donut)
+                setSoloButtons()
+            }
+            GameType.SOLONOUGHT -> {
+                playerDrawable = resources.getDrawable(R.drawable.donut)
+                computerDrawable = resources.getDrawable(R.drawable.cross)
+                setSoloButtons()
+                computerClick()
+            }
+            GameType.TWOPLAYERS -> {
+                playerDrawable = resources.getDrawable(R.drawable.cross)
+                computerDrawable = resources.getDrawable(R.drawable.donut)
+                setMultiButtons()
+            }
         }
 
         binding.restartBtn.setOnClickListener {
@@ -63,8 +77,20 @@ class GameFieldFragment : Fragment() {
                 it.setImageDrawable(null)
                 it.isEnabled = true
             }
+            if (gameType == GameType.SOLONOUGHT) {
+                playerDrawable = resources.getDrawable(R.drawable.donut)
+                computerDrawable = resources.getDrawable(R.drawable.cross)
+            } else {
+                playerDrawable = resources.getDrawable(R.drawable.cross)
+                computerDrawable = resources.getDrawable(R.drawable.donut)
+            }
+            isGameOver = false
         }
 
+        return binding.root
+    }
+
+    private fun setSoloButtons() {
         //setting up button on click methods
         binding.apply {
             button1.setOnClickListener {
@@ -148,12 +174,23 @@ class GameFieldFragment : Fragment() {
             }
         }
 
-//        //for all buttons
-//        buttons.forEach { imageButton ->
-//            imageButton.setOnClickListener { buttonClick(imageButton) }
-//        }
+        //        //for all buttons
+        //        buttons.forEach { imageButton ->
+        //            imageButton.setOnClickListener { buttonClick(imageButton) }
+        //        }
+    }
 
-        return binding.root
+    private fun setMultiButtons() {
+        buttons.forEach { imageButton ->
+            imageButton.setOnClickListener {
+                if (!isGameOver) {
+                    humanClick(imageButton)
+                    val temp = playerDrawable
+                    playerDrawable = computerDrawable
+                    computerDrawable = temp
+                }
+            }
+        }
     }
 
     private fun buttonClick(btn: ImageButton) {
