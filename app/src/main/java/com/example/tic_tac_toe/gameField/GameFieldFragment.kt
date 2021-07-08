@@ -1,6 +1,5 @@
 package com.example.tic_tac_toe.gameField
 
-import android.annotation.SuppressLint
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import androidx.appcompat.content.res.AppCompatResources
 import com.example.tic_tac_toe.R
 import com.example.tic_tac_toe.databinding.FragmentGameFieldBinding
 import com.example.tic_tac_toe.startMenu.GameType
@@ -16,6 +16,8 @@ import kotlin.random.Random
 class GameFieldFragment : Fragment() {
 
     private lateinit var binding: FragmentGameFieldBinding
+    private lateinit var cross: Drawable
+    private lateinit var donut: Drawable
 
     private lateinit var buttons: List<ImageButton>
     private lateinit var availableButtons: MutableList<ImageButton>
@@ -26,13 +28,14 @@ class GameFieldFragment : Fragment() {
     private lateinit var gameType: GameType
     private var isGameOver: Boolean = false
 
-    @SuppressLint("UseCompatLoadingForDrawables")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
         binding = FragmentGameFieldBinding.inflate(inflater)
+        cross = AppCompatResources.getDrawable(requireContext(), R.drawable.cross)!!
+        donut = AppCompatResources.getDrawable(requireContext(), R.drawable.donut)!!
 
         binding.apply {
             buttons = listOf(
@@ -53,20 +56,19 @@ class GameFieldFragment : Fragment() {
 
         when (gameType) {
             GameType.SOLOCROSS -> {
-//              cross = AppCompatResources.getDrawable(applicationContext, R.drawable.cross)?.toBitmap()!!
-                playerDrawable = resources.getDrawable(R.drawable.cross)
-                computerDrawable = resources.getDrawable(R.drawable.donut)
+                playerDrawable = cross
+                computerDrawable = donut
                 setSoloButtons()
             }
             GameType.SOLONOUGHT -> {
-                playerDrawable = resources.getDrawable(R.drawable.donut)
-                computerDrawable = resources.getDrawable(R.drawable.cross)
+                playerDrawable = donut
+                computerDrawable = cross
                 setSoloButtons()
                 computerClick()
             }
             GameType.TWOPLAYERS -> {
-                playerDrawable = resources.getDrawable(R.drawable.cross)
-                computerDrawable = resources.getDrawable(R.drawable.donut)
+                playerDrawable = cross
+                computerDrawable = donut
                 setMultiButtons()
             }
         }
@@ -78,11 +80,12 @@ class GameFieldFragment : Fragment() {
                 it.isEnabled = true
             }
             if (gameType == GameType.SOLONOUGHT) {
-                playerDrawable = resources.getDrawable(R.drawable.donut)
-                computerDrawable = resources.getDrawable(R.drawable.cross)
+                playerDrawable = donut
+                computerDrawable = cross
+                computerClick()
             } else {
-                playerDrawable = resources.getDrawable(R.drawable.cross)
-                computerDrawable = resources.getDrawable(R.drawable.donut)
+                playerDrawable = cross
+                computerDrawable = donut
             }
             isGameOver = false
         }
@@ -103,9 +106,7 @@ class GameFieldFragment : Fragment() {
 
                     isGameOver = isGameOver(
                         buttons,
-                        playerDrawable,
                         gameType,
-                        availableButtons.size,
                         requireContext()
                     )
                     if (!isGameOver) {
@@ -119,9 +120,7 @@ class GameFieldFragment : Fragment() {
                         }
                         isGameOver = isGameOver(
                             buttons,
-                            playerDrawable,
                             gameType,
-                            availableButtons.size,
                             requireContext()
                         )
                     }
@@ -138,9 +137,7 @@ class GameFieldFragment : Fragment() {
 
                     isGameOver = isGameOver(
                         buttons,
-                        playerDrawable,
                         gameType,
-                        availableButtons.size,
                         requireContext()
                     )
                     if (!isGameOver) {
@@ -211,9 +208,7 @@ class GameFieldFragment : Fragment() {
         availableButtons.remove(btn)
         isGameOver = isGameOver(
             buttons,
-            playerDrawable,
             gameType,
-            availableButtons.size,
             requireContext()
         )
     }
@@ -228,9 +223,7 @@ class GameFieldFragment : Fragment() {
 
             isGameOver = isGameOver(
                 buttons,
-                playerDrawable,
                 gameType,
-                availableButtons.size,
                 requireContext()
             )
         }
