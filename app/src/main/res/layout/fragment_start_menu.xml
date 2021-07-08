@@ -6,7 +6,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
         tools:context=".MainActivity">
 
         <RadioGroup
@@ -25,13 +24,13 @@
                 android:id="@+id/onePlayerGameRadioButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="casual"
                 android:paddingStart="0dp"
                 android:paddingEnd="40dp"
                 android:text="@string/one_player"
                 android:textAlignment="center"
-                android:textColor="@color/black"
                 android:textSize="20sp"
-                app:buttonTint="@color/purple_500" />
+                app:buttonTint="?colorSecondaryVariant" />
 
             <RadioButton
                 android:id="@+id/twoPlayerGameRadioButton"
@@ -43,9 +42,8 @@
                 android:paddingEnd="40dp"
                 android:text="@string/two_players"
                 android:textAlignment="center"
-                android:textColor="@color/black"
                 android:textSize="20sp"
-                app:buttonTint="@color/purple_500" />
+                app:buttonTint="?colorSecondaryVariant" />
 
             <RadioGroup
                 android:id="@+id/soloGameTypeRadioGroup"
@@ -61,9 +59,7 @@
                     android:button="@null"
                     android:checked="false"
                     android:enabled="false"
-                    android:gravity="center"
-                    android:textSize="16sp"
-                    app:buttonTint="@color/purple_500" />
+                    android:gravity="center" />
 
                 <RadioButton
                     android:id="@+id/noughtsRadioButton"
@@ -74,8 +70,6 @@
                     android:button="@null"
                     android:enabled="false"
                     android:gravity="center"
-                    android:textSize="16sp"
-                    app:buttonTint="@color/purple_500"
                     tools:enabled="true" />
             </RadioGroup>
 
@@ -89,7 +83,6 @@
             android:background="@drawable/border_rounded"
             android:enabled="false"
             android:text="@string/start"
-            android:textColor="@color/start_btn_text_color"
             app:backgroundTint="@null"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

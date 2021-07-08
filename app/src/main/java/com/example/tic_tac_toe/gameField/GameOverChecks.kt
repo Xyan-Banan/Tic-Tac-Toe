@@ -5,10 +5,12 @@ import android.content.Context
 import android.graphics.drawable.Drawable
 import android.widget.ImageButton
 import android.widget.Toast
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.graphics.drawable.toBitmap
 import com.example.tic_tac_toe.R
 import com.example.tic_tac_toe.startMenu.GameType
 
+//TODO("change to sets")
 private fun findGameOverRow(buttons: List<ImageButton>): Drawable? {
     val images = buttons.map { it.drawable }
     if (images[0] != null && (
@@ -46,14 +48,15 @@ fun isGameOver(
     applicationContext: Context
 ): Boolean {
     findGameOverRow(buttons)?.also { buttonImg ->
+        val crossBitmap = AppCompatResources.getDrawable(applicationContext, R.drawable.cross)?.toBitmap()
+
         val msg = when (gameType) {
             GameType.SOLOCROSS, GameType.SOLONOUGHT -> when (buttonImg) {
                 playerDrawable -> "Game over: You win!"
                 else -> "Game over: You lose :("
             }
             GameType.TWOPLAYERS -> when (buttonImg.toBitmap()) {
-                applicationContext.resources.getDrawable(R.drawable.cross)
-                    .toBitmap() -> "Game over: Player 1 win!"
+                crossBitmap -> "Game over: Player 1 win!"
                 else -> "Game over: Player 2 win!"
             }
         }
