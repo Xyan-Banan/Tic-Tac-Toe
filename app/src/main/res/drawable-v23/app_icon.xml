@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/border_rounded" />
+    <item
+        android:width="100px"
+        android:height="100px"
+        android:bottom="@dimen/app_icon_padding"
+        android:drawable="@drawable/donut"
+        android:gravity="center"
+        android:left="@dimen/app_icon_padding"
+        android:right="@dimen/app_icon_padding"
+        android:top="@dimen/app_icon_padding" />
+    <item
+        android:width="90px"
+        android:height="90px"
+        android:drawable="@drawable/cross"
+        android:gravity="center" />
+</layer-list>

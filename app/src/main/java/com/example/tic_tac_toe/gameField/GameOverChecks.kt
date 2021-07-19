@@ -9,6 +9,8 @@ import androidx.core.graphics.drawable.toBitmap
 import com.example.tic_tac_toe.R
 import com.example.tic_tac_toe.startMenu.GameType
 
+fun <T> List<T>.allEqual(): Boolean = all { it == first() }
+
 private fun findGameOverRow(images: List<Bitmap?>): Bitmap? {
 
     val winLists = listOf(
@@ -22,7 +24,7 @@ private fun findGameOverRow(images: List<Bitmap?>): Bitmap? {
         listOf(images[2], images[4], images[6])  //right diagonal
     )
 
-    return winLists.firstOrNull { list -> list[0] != null && list.all { it == list[0] } }?.first()
+    return winLists.firstOrNull { list -> list[0] != null && list.allEqual() }?.first()
 
 //    val (crosses, noughts) = buttonsNotNull.partition { it.drawable.toBitmap() == crossBitmap }
 //
@@ -33,45 +35,47 @@ private fun findGameOverRow(images: List<Bitmap?>): Bitmap? {
 //    return null
 }
 
+val ImageButton.bitmap
+    get() = drawable?.toBitmap()
+
 fun isGameOver(
     buttons: List<ImageButton>,
     gameType: GameType,
-    applicationContext: Context
+    context: Context
 ): Boolean {
-    val images = buttons.map { it.drawable?.toBitmap() }
+    val images = buttons.map { it.bitmap }
     val imagesNotNull = images.filterNotNull()
     //break if not enough steps on game field
     if (imagesNotNull.size < 5)
         return false
 
-    val crossBitmap =
-        AppCompatResources.getDrawable(applicationContext, R.drawable.cross)!!.toBitmap()
+    val crossBitmap = AppCompatResources.getDrawable(context, R.drawable.cross)!!.toBitmap()
     val gameOverBitmap = findGameOverRow(images)
 
-    if (gameOverBitmap == null) {
-        //if there is no available buttons - draw
-        if (imagesNotNull.size >= buttons.size) {
-            Toast.makeText(applicationContext, "Game over: Draw!", Toast.LENGTH_SHORT).show()
-            return true
+    val msg =
+        if (gameOverBitmap != null) {
+            when (gameType) {
+                GameType.SOLOCROSS -> when (gameOverBitmap) {
+                    crossBitmap -> "Game over: You win!"
+                    else -> "Game over: You lose :("
+                }
+                GameType.SOLONOUGHT -> when (gameOverBitmap) {
+                    crossBitmap -> "Game over: You lose :("
+                    else -> "Game over: You win!"
+                }
+                GameType.TWOPLAYERS -> when (gameOverBitmap) {
+                    crossBitmap -> "Game over: Player 1 win!"
+                    else -> "Game over: Player 2 win!"
+                }
+            }
+        } else {
+            //if there is no available buttons - draw
+            if (imagesNotNull.size >= buttons.size) {
+                "Game over: Draw!"
+            } else {
+                return false
+            }
         }
-    } else {
-        val msg = when (gameType) {
-            GameType.SOLOCROSS -> when (gameOverBitmap) {
-                crossBitmap -> "Game over: You win!"
-                else -> "Game over: You lose :("
-            }
-            GameType.SOLONOUGHT -> when (gameOverBitmap) {
-                crossBitmap -> "Game over: You lose :("
-                else -> "Game over: You win!"
-            }
-            GameType.TWOPLAYERS -> when (gameOverBitmap) {
-                crossBitmap -> "Game over: Player 1 win!"
-                else -> "Game over: Player 2 win!"
-            }
-        }
-
-        Toast.makeText(applicationContext, msg, Toast.LENGTH_SHORT).show()
-        return true
-    }
-    return false
+    Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
+    return true
 }

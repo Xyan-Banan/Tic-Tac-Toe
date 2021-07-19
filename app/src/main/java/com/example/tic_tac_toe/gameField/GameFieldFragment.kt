@@ -104,11 +104,7 @@ class GameFieldFragment : Fragment() {
                     it.isEnabled = false
                     availableButtons.remove(it)
 
-                    isGameOver = isGameOver(
-                        buttons,
-                        gameType,
-                        requireContext()
-                    )
+                    isGameOver = isGameOver(buttons, gameType, requireContext())
                     if (!isGameOver) {
                         //computer click
                         val countAvailable = availableButtons.size
@@ -118,11 +114,7 @@ class GameFieldFragment : Fragment() {
                             btn.setImageResource(R.drawable.donut)
                             availableButtons.remove(btn)
                         }
-                        isGameOver = isGameOver(
-                            buttons,
-                            gameType,
-                            requireContext()
-                        )
+                        isGameOver = isGameOver(buttons, gameType, requireContext())
                     }
                 }
             }
@@ -135,11 +127,7 @@ class GameFieldFragment : Fragment() {
                     it.isEnabled = false
                     availableButtons.remove(it)
 
-                    isGameOver = isGameOver(
-                        buttons,
-                        gameType,
-                        requireContext()
-                    )
+                    isGameOver = isGameOver(buttons, gameType, requireContext())
                     if (!isGameOver) {
                         //computer click
                         computerClick()
@@ -206,11 +194,7 @@ class GameFieldFragment : Fragment() {
         btn.setImageDrawable(playerDrawable)
         btn.isEnabled = false
         availableButtons.remove(btn)
-        isGameOver = isGameOver(
-            buttons,
-            gameType,
-            requireContext()
-        )
+        isGameOver = isGameOver(buttons, gameType, requireContext())
     }
 
     private fun computerClick() {
@@ -221,11 +205,7 @@ class GameFieldFragment : Fragment() {
             btn.setImageDrawable(computerDrawable)
             availableButtons.remove(btn)
 
-            isGameOver = isGameOver(
-                buttons,
-                gameType,
-                requireContext()
-            )
+            isGameOver = isGameOver(buttons, gameType, requireContext())
         }
     }
 }
