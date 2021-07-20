@@ -11,7 +11,6 @@ import androidx.appcompat.content.res.AppCompatResources
 import com.example.tic_tac_toe.R
 import com.example.tic_tac_toe.databinding.FragmentGameFieldBinding
 import com.example.tic_tac_toe.startMenu.GameType
-import kotlin.random.Random
 
 class GameFieldFragment : Fragment() {
 
@@ -107,9 +106,8 @@ class GameFieldFragment : Fragment() {
                     isGameOver = isGameOver(buttons, gameType, requireContext())
                     if (!isGameOver) {
                         //computer click
-                        val countAvailable = availableButtons.size
-                        if (countAvailable > 0) {
-                            val btn = availableButtons[Random.nextInt(countAvailable)]
+                        if (availableButtons.isNotEmpty()) {
+                            val btn = availableButtons.random()
                             btn.isEnabled = false
                             btn.setImageResource(R.drawable.donut)
                             availableButtons.remove(btn)
@@ -170,12 +168,16 @@ class GameFieldFragment : Fragment() {
             imageButton.setOnClickListener {
                 if (!isGameOver) {
                     humanClick(imageButton)
-                    val temp = playerDrawable
-                    playerDrawable = computerDrawable
-                    computerDrawable = temp
+                    swapPlayers()
                 }
             }
         }
+    }
+
+    private fun swapPlayers() {
+        val temp = playerDrawable
+        playerDrawable = computerDrawable
+        computerDrawable = temp
     }
 
     private fun buttonClick(btn: ImageButton) {
@@ -198,9 +200,8 @@ class GameFieldFragment : Fragment() {
     }
 
     private fun computerClick() {
-        val countAvailable = availableButtons.size
-        if (countAvailable > 0) {
-            val btn = availableButtons[Random.nextInt(countAvailable)]
+        if (availableButtons.isNotEmpty()) {
+            val btn = availableButtons.random()
             btn.isEnabled = false
             btn.setImageDrawable(computerDrawable)
             availableButtons.remove(btn)
