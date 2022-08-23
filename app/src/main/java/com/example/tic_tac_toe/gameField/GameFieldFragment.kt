@@ -2,12 +2,12 @@ package com.example.tic_tac_toe.gameField
 
 import android.graphics.drawable.Drawable
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.fragment.app.Fragment
 import com.example.tic_tac_toe.R
 import com.example.tic_tac_toe.databinding.FragmentGameFieldBinding
 import com.example.tic_tac_toe.startMenu.GameType
