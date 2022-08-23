@@ -2,12 +2,13 @@ package com.example.tic_tac_toe.gameField
 
 import android.graphics.drawable.Drawable
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.fragment.app.Fragment
 import com.example.tic_tac_toe.R
 import com.example.tic_tac_toe.databinding.FragmentGameFieldBinding
 import com.example.tic_tac_toe.startMenu.GameType
@@ -48,9 +49,10 @@ class GameFieldFragment : Fragment() {
                 button8,
                 button9
             )
-
-            availableButtons = buttons.toMutableList()
         }
+
+        availableButtons = buttons.toMutableList()
+
         gameType = GameFieldFragmentArgs.fromBundle(requireArguments()).gameType
 
         when (gameType) {
@@ -94,73 +96,10 @@ class GameFieldFragment : Fragment() {
 
     private fun setSoloButtons() {
         //setting up button on click methods
-        binding.apply {
-            button1.setOnClickListener {
-                if (!isGameOver) {
-                    it as ImageButton
-                    //human click
-                    it.setImageDrawable(playerDrawable)
-                    it.isEnabled = false
-                    availableButtons.remove(it)
-
-                    isGameOver = isGameOver(buttons, gameType, requireContext())
-                    if (!isGameOver) {
-                        //computer click
-                        if (availableButtons.isNotEmpty()) {
-                            val btn = availableButtons.random()
-                            btn.isEnabled = false
-                            btn.setImageResource(R.drawable.donut)
-                            availableButtons.remove(btn)
-                        }
-                        isGameOver = isGameOver(buttons, gameType, requireContext())
-                    }
-                }
-            }
-
-            button2.setOnClickListener {
-                if (!isGameOver) {
-                    it as ImageButton
-                    //human click
-                    it.setImageDrawable(playerDrawable)
-                    it.isEnabled = false
-                    availableButtons.remove(it)
-
-                    isGameOver = isGameOver(buttons, gameType, requireContext())
-                    if (!isGameOver) {
-                        //computer click
-                        computerClick()
-                    }
-                }
-            }
-
-            button3.setOnClickListener {
-                if (!isGameOver) {
-                    //human click
-                    humanClick(it as ImageButton)
-
-                    if (!isGameOver) {
-                        //computer click
-                        computerClick()
-                    }
-                }
-            }
-
-            button4.setOnClickListener {
-                buttonClick(it as ImageButton)
-            }
+        buttons.forEach { imageButton ->
+            imageButton.setOnClickListener { buttonClick(imageButton)
+                Log.d("GAME", "setSoloButtons: $imageButton")}
         }
-
-        //for the rest 5 buttons
-        buttons.forEachIndexed { index, imageButton ->
-            if (index > 3) {
-                imageButton.setOnClickListener { buttonClick(imageButton) }
-            }
-        }
-
-        //        //for all buttons
-        //        buttons.forEach { imageButton ->
-        //            imageButton.setOnClickListener { buttonClick(imageButton) }
-        //        }
     }
 
     private fun setMultiButtons() {
